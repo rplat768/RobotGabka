@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Robot - gąbka</title>
+
+  <meta @charset "UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+  
+</head>
+<body>
+    
+  <div class="header-place">
+  </div>
+  
+  <header class="col-4">
+    Robot - gąbka
+    <a href="#" class="caret-up" > </a>
+  </header>
+  
+  <nav class="col-1" >
+    <a href="#" onclick="return ShowContent('wprowadzenie.html')" >01. Wprowadzenie</a>
+    <a href="#" onclick="return ShowContent('zalozenia.html')" >02. Założenia</a>
+    <a href="#" onclick="return ShowContent('zadania.html')" >03. Przydział zadań</a>
+    <a href="#" onclick="return ShowContent(null)" >???</a>
+  </nav>
+  
+  <article id="content" class="col-3" >
+  </article>    
+    
+  <script>
+    ShowContent('wprowadzenie.html');
+  </script>
+</body>
+</html>
