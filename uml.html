@@ -2,31 +2,188 @@
     04. Diagramy UML
   </header>
   
-  <h2>
-    Przypadki użycia
-  </h2>
-  <section>
-    W przygotowaniu
-  </section>
-  
-  <h2>
-    Scenariusze przypadków użycia
-  </h2>
-  <section>
-    W przygotowaniu
-  </section>
+      <h2>
+        Przypadki użycia
+      </h2>
+      <section>
+        <img class="col-3 diagram" src="img/UseCases.jpg" alt="Diagram przypadków użycia" />
+      </section>
+      <br/>
+      
+      <h2>
+        Scenariusze przypadków użycia
+      </h2>
+      <section>
+        <h3>
+            Scenariusz przypadku UC10 - „wybierz tryb pracy”:
+        </h3>
+        <div class="use-case">
+            <h4>
+                Opis:
+            </h4>
+                Przypadek użycia opisuje sposób zmiany trybu przez użytkownika, komunikację między komponentami systemu oraz czynności wykonywane przez te komponenty.
+            <h4>
+                Warunki początkowe:
+            </h4>
+                brak
+            <h4>
+                Przebieg główny:
+            </h4>
+                1. Użytkownik wybiera opcję zmiany trybu pracy
+                <br/>
+                2. Użytkownik wybiera tryb pracy
+                <br/>
+                3. Aplikacja wysyła do  modułu wifi polecenie zmiany trybu pracy
+                <br/>
+                4. Moduł wifi dołącza polecenie do kolejki poleceń
+                <br/>
+                5. Kontroler zdejmuje polecenie zmiany trybu pracy z kolejki
+                <br/>
+                6. System sprawdza, czy robot jest w ruchu
+                <br/>
+                6a.	Robot jest w ruchu
+                <br/>
+                7. Kontroler zmienia tryb pracy
+            <h4>
+                Przebieg alternatywny 6a - „Robot jest w ruchu”:
+            </h4>
+                1. Kontroler zatrzymuje robota
+                <br/>
+                2. Kontroler przechodzi do punktu 7
+            <h4>
+                Warunki końcowe:
+            </h4>
+            system zostaje przestawiony w wybrany tryb pracy
+        </div>
+        <br/>
+        
+        <h3>
+            Scenariusz przypadku UC20 - „ścieraj tablicę automatycznie”:
+        </h3>
+        <div class="use-case">
+            <h4>
+                Opis:
+            </h4>
+                Przypadek użycia opisuje sposób wydania przez użytkownika polecenia automatycznego ścierania tablicy, komunikację między komponentami systemu oraz czynności wykonywane przez te komponenty.
+            <h4>
+                Warunki początkowe:
+            </h4>
+                system przełączony do trybu pracy automatycznej
+            <h4>
+                Przebieg główny:
+            </h4>
+                1. Użytkownik wybiera polecenie rozpoczęcia ścierania
+                <br/>
+                2. Aplikacja wysyła do  modułu wifi polecenie rozpoczęcia ścierania
+                <br/>
+                3. Moduł wifi dołącza polecenie do kolejki poleceń
+                <br/>
+                4. Kontroler zdejmuje polecenie rozpoczęcia ścierania z kolejki
+                <br/>
+                5. Kontroler sprawdza aktualny stan robota
+                <br/>
+                5a.	Robot w trakcie pracy
+                <br/>
+                6. Kontroler aktualizuje stan robota
+                <br/>
+                7. Kontroler rozpoczyna ścieranie
+            <h4>
+                Przebieg alternatywny 5a - „Robot w trakcie pracy”:
+            </h4>
+                1. Kontroler zatrzymuje robota
+                <br/>
+                2. Kontroler przechodzi do punktu 6
+            <h4>
+                Warunki końcowe:
+            </h4>
+            robot jest w trakcie procedury ścierania tablicy
+        </div>
 
-  <h2>
-    Diagramy sekwencji
-  </h2>
-  <section>
-    W przygotowaniu
-  </section>
-
-  <h2>
-    Diagramy aktywności
-  </h2>
-  <section>
-    W przygotowaniu
-  </section>
+        <br/>
+        <h3>
+            Scenariusz przypadku UC30 - „wykonaj ruch sterowany ręcznie”:
+        </h3>
+        <div class="use-case">
+            <h4>
+                Opis:
+            </h4>
+                Przypadek użycia opisuje sposób wydania przez użytkownika polecenia wykonania ruchu, komunikację między komponentami systemu oraz czynności wykonywane przez te komponenty.
+            <h4>
+                Warunki początkowe:
+            </h4>
+                system przełączony do trybu pracy ręcznej
+            <h4>
+                Przebieg główny:
+            </h4>
+                1. Użytkownik wybiera przycisk wykonania ruchu
+                <br/>
+                2. Aplikacja wysyła do modułu wifi polecenie wykonania ruchu
+                <br/>
+                3. Moduł wifi dołącza ruch do kolejki poleceń
+                <br/>
+                4. Kontroler zdejmuje polecenie wykonania ruchu z kolejki
+                <br/>
+                5. Kontroler sprawdza aktualny stan robota
+                <br/>
+                5a.	Robot w trakcie pracy
+                <br/>
+                6. Kontroler aktualizuje stan robota
+                <br/>
+                7. Kontroler wykonuje wybrany ruch
+            <h4>
+                Przebieg alternatywny 5a - „Robot w trakcie pracy”:
+            </h4>
+                1. Kontroler zatrzymuje robota
+                <br/>
+                2. Kontroler przechodzi do punktu 6
+            <h4>
+                Warunki końcowe:
+            </h4>
+            robot podjął próbę wykonania wybranego rodzaju ruchu
+        </div>
+        <br/>
+        
+      </section>
+      
+      <h2>
+        Diagramy sekwencji
+      </h2>
+      <section>
+        Diagram przypadku UC01 - „wybierz tryb pracy”:      
+        <img class="col-3 diagram" src="img/DS/DSZmianaTrybu.jpg" alt="Zmiana trybu" />
+        <br/>
+        Diagram przypadku UC20 - „ścieraj tablicę automatycznie”:
+        <img class="col-3 diagram" src="img/DS/DSCzyszczenieAutomatyczne.jpg" alt="Czyszczenie automatyczne" />
+        <br/>
+        Diagram przypadku UC30 - „wykonaj ruch sterowany ręcznie”:
+        <img class="col-3 diagram" src="img/DS/DSWykonanieRuchu.jpg" alt="Wykonanie ruchu" />
+        <br/>
+        Diagram pokazujący komunikację kontrolera z innymi modułami podczas wykonywania głównej pętli kontrolera:
+        <img class="col-3 diagram" src="img/DS/KomunikacjaModulDSow.jpg" alt="Komunikacja modułóow" />
+      </section>
+      <br/>
+      
+      <h2>
+        Diagramy maszyny stanów
+      </h2>
+      <section>
+        Stany robota:
+        <img class="col-2 diagram" src="img/DMS/StanyRobota.jpg" alt="Stany robota" />
+        <br/>
+        Stany układu napędowego:
+        <img class="col-3 diagram" src="img/DMS/StanyUkladuNapedowego.jpg" alt="Stany układu napędowego" />
+        <br/>
+        Stany silników:
+        <img class="col-3 diagram" src="img/DMS/StanySilnikow.jpg" alt="Stany silników" />
+        <br/>
+        Schemat czyszczenia automatycznego w ujęciu zmiany stanów:
+        <img class="col-3 diagram" src="img/DMS/StanyCzyszczeniaAutomatycznego.jpg" alt="Stany czyszczenia automatycznego" />
+      </section>
+      
+      <h2>
+        Diagramy aktywności
+      </h2>
+      <section>
+        W przygotowaniu
+      </section>
   
