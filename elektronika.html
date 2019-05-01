@@ -3,8 +3,87 @@
   </header>
   
   <h2>
-    
+    Kontroler
   </h2>
   <section>
-    W przygotowaniu
+    Jako kontroler zostanie użyta platforma oparta na mikrokontrolerze AVR Atmega32u4 zgodna z modułem Arduino Leonardo. Kontroler zawiera 20 pinów I/O, przy czym 12 z nich może pracować jako wejścia analogowe oraz 5 jako wyjścia PWM. Szczególnie istotna jest liczba wyjść PWM – jako że sterowanie silników będzie polegało na wysyłaniu 4 sygnałów sterujących PWM do sterownika silników (po dwa na każdy z dwóch silników, przy czym aktywny będzie tylko jeden z sygnałów – bo każdy sygnał odpowiada jednemu kierunkowi jazdy)
+    Pozostałe 16 pinów zostanie wykorzystanych do:
+    <ul>
+      <li>
+        - komunikacji szeregowej z modułem wi-fi i z sensorem orientacji przestrzennej (2 piny)
+      </li>
+      <li>
+        - odczytu sensorów wykrywania krawędzi (4 piny na 4 sensory – sygnał binarny)
+      </li>
+      <li>
+        - odczytu impulsów z sensorów obrotów silników (po 2 binarne sygnały na każdy silnik – razem 4 piny)
+      </li>
+    </ul>
+    Dokumentacja standardu: <a href="https://www.sparkfun.com/products/12640" >https://www.sparkfun.com/products/12640</a>
+    <br/>
+    W projekcie wykorzystany zostanie „klon” urządzenia w pełni zgodny ze wskazaną dokumentacją – taktowany zegarem 16MHz i z napięciem sygnałów logicznych 5V.
   </section>
+  
+  <h2>
+    Moduł komunikacji Wi-Fi
+  </h2>
+  <section>
+    Do realizacji projektu wykorzystany zostanie moduł ESP-01 ESP8266 – jeden z najtańszych modułów wifi na rynku. Działa w standardzie WiFI 802.11 b/g/n na częstotliwości 2,4 GHz. Moduł umożliwia zaprogramowanie 3 pinów GPIO, lecz w projekcie nie zostanie to wykorzystane. Do komunikacji z mikrokontrolerem wykorzystane zostanie złącze szeregowe w standardzie interfejsu I2C.
+    Ograniczeniem jest napięcie zasilania modułu i sygnałów logicznych, które wynosi 3.3V. Zatem do podłączenia zasilania zostanie wykorzystana dodatkowa przetwornica step-down, a do komunikacji z mikrokontrolerem przez port szeregowy – dwukierunkowy konwerter stanów logicznych (5V<->3.3V)
+    Maksymalny pobór prądu modułu wifi to 300mA, zatem przetwornicę dobrano tak, by pokrywała to zapotrzebowanie z zapasem.
+    <br/>
+    Dokumentacja modułu Wi-Fi: <a href="https://nurdspace.nl/ESP8266" >https://nurdspace.nl/ESP8266</a>
+    <br/>
+    Dokumentacja przetwornicy step-down: <a href="https://www.pololu.com/product/2842" >https://www.pololu.com/product/2842</a>
+    <br/>
+    Dokumentacja konwertera stanów logicznych: <a href="https://www.sparkfun.com/products/12009" >https://www.sparkfun.com/products/12009</a>
+  </section>
+
+  <h2>
+    Sensor orientacji w przestrzeni
+  </h2>
+  <section>
+    Wykorzystany zostanie moduł MPU-6050 – układ zawierający zintegrowany żyroskop i akcelerometr. W realizacji projektu wykorzystany zostanie akcelerometr wykorzystujący efekt piezoelektryczny – dzięki niemu określony zostanie kierunek i zwrot wektora przyspieszenia ziemskiego. 
+    <br/>
+    Do komunikacji z mikrokontrolerem wykorzystany zostanie port szeregowy z interfejsem I2C (dzielony z modułem wifi).
+    <br/>
+    Napięcie zasilania i sygnałów logicznych: 5V.
+    <br/>
+    Dokumentacja układu MPU6050: <a href="http://www.haoyuelectronics.com/Attachment/GY-521/mpu6050.pdf" >http://www.haoyuelectronics.com/Attachment/GY-521/mpu6050.pdf</a>
+  </section>
+
+  <h2>
+    Sensory wykrywania krawędzi tablicy
+  </h2>
+  <section>
+    Uzyte zostaną 4 sensory odbiciowe pracujące w podczerwieni oparte na komparatorze LM393. Zakres wykrywanej przeszkody to 0-30mm. Sensory na wyjściu dajądwa sygnały – analogowy i cyfrowy. Analogowy to sygnał napięciowy 0-5V wskazujący odległość od przeszkody, cyfrowy – to sygnał binarny oznaczający 0-brak przeszkody/1-przeszkoda w ustalonej lub mniejszej odległości. W realizacji projektu wykorzystany zostanie sygnał cyfrowy. Próg załączenia sygnału jest ustawiany za pomocą potencjometru.
+    <br/>
+    Napięcie zasilania – 5V.
+    <br/>
+    Strona producenta: <a href="https://www.waveshare.com/product/Infrared-Reflective-Sensor.htm" >https://www.waveshare.com/product/Infrared-Reflective-Sensor.htm</a>
+  </section>
+
+  <h2>
+    Sensory – liczniki impulsów (obrotów silnika)
+  </h2>
+  <section>
+    Wykorzystane zostaną dwa magnetyczne enkodery kwadraturowe. Liczba impulsów na jeden obrót: 12. Zliczanie obrotów i ustalanie kierunku obrotu polega na sprawdzaniu kolejności pojawiania się sygnału prostokątnego na dwóch pinach wyjściowych modułu będących wyjściem dwóch czujników Halla.
+    <br/>
+    Napięcie zasilania – od 2 do 18V.
+    <br/>
+    Płytka modułu umożliwia zainstalowanie na wybranych do projektu silnikach z przedłużonym wałem.
+    <br/>
+    Dokumentacja: <a href="https://www.pololu.com/product/2598" >https://www.pololu.com/product/2598</a>
+  </section>
+    
+  <h2>
+    Sterownik silników
+  </h2>
+  <section>
+    Do projektu wykorzystany zostanie dwukanałowy sterownik oparty na układzie DRV8833.
+    Moduł umożliwia sterowanie silników napięciem od 2.7 do 10.8V i ciągły pobór prądu do 1.2A na kanał, co jest w zupełności wystarczające do wybranych silników.
+    Do modułu należy podłączyć 4 sygnały sterujące typu PWM – po dwa na kanał (osobny sygnał na osobny kierunek obrotów).
+    <br/>
+    Dokumentacja: <a href="https://www.pololu.com/product/2130" >https://www.pololu.com/product/2130</a>
+  </section>
+  

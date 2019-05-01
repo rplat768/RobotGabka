@@ -21,7 +21,7 @@ body {
   .col-3 { width: 75%; }
   .col-4 { width: 100%; }
   
-  .caret-up { display: none; }
+//  .caret-up { display: none; }
   
   nav { margin-top: 20px; }
 }

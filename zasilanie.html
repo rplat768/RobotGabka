@@ -6,12 +6,31 @@
     Zasilanie
   </h2>
   <section>
-    W przygotowaniu
+    Jako źródło prądu w prototypie wykorzystana zostanie bateria 9V, która umożliwi kilkadziesiąt minut pracy urządzenia – wystarczająco dużo na przeprowadzenie wszystkich testów.
+    Do zasilania silników i mikrokontrolera zostanie wykorzystana przetwornica step-down oparta na układzie LM2596 umożliwiająca redukcję poziomu napięcia wejściowego do wartości z przedziału 3.2-35V. W projekcie napięcie to zostanie ustawione na 6V, co jest optymalną wielkością dla silników podaną przez producenta. Wydajność prądowa wybranej przetwornicy to 3A, co jest wielkością wielokrotnie przekraczającą pobór prądu przez wszystkie elementy wykorzystane w projekcie.
+    Z uwagi na wbudowanie na płytce mikrokontrolera stabilizatora napięcia 5V o wydajności prądowej ok. 300mA możliwe jest wyprowadzenie z tej płytki zasilania do innych modułów – co zostanie wykorzystane do zasilania modułu akceleratora MPU-6050 (wymaga on zasilania napięciem 5V).
+    Dodatkowo do zasilania modułu wifi (3.3V) wykorzystana zostanie osobna przetwornica step-down o maksymalnej wydajności 0.5A
+    <br/>
+    Dokumentacja przetwornika LM2596: <a href="https://botland.com.pl/index.php?controller=attachment&id_attachment=1213" >https://botland.com.pl/index.php?controller=attachment&id_attachment=1213</a>
   </section>
-  
+
   <h2>
     Układ napędowy
   </h2>
   <section>
-    W przygotowaniu
+    <h3>
+      Sterownik silników
+    </h3>
+    Do projektu wykorzystany zostanie dwukanałowy sterownik oparty na układzie DRV8833.
+    Moduł umożliwia sterowanie silników napięciem od 2.7 do 10.8V i ciągły pobór prądu do 1.2A na kanał, co jest w zupełności wystarczające do wybranych silników.
+    Do modułu należy podłączyć 4 sygnały sterujące typu PWM – po dwa na kanał (osobny sygnał na osobny kierunek obrotów).
+    <br/>
+    Dokumentacja: <a href="https://www.pololu.com/product/2130" >https://www.pololu.com/product/2130</a>
+    <h3>
+      Silniki
+    </h3>
+    Do projektu wybrano silniki ze zintegrowaną przekładnią 100:1. Moment obrotowy silników to 0.088Nm, napięcie zasilania 3-9V, przy czym wybrano optymalny poziom napięcia równy 6V.
+    Średni pobór prądu – 40mA, maksymalny chwilowy przy zatrzymanym wale – 360mA
+    <br/>
+    Katalog producenta: <a href="https://www.pololu.com/product/2204" >https://www.pololu.com/product/2204</a>
   </section>
